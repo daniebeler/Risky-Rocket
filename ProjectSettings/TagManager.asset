@@ -1,0 +1,62 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!78 &1
+TagManager:
+  serializedVersion: 2
+  tags:
+  - Start
+  - MenuCanvas
+  - btn1
+  - btn2
+  - btn3
+  - btn4
+  - btn5
+  - btn6
+  - btn7
+  - btn8
+  - survive
+  - btnhome
+  - ScriptHolder
+  - LevelHolder
+  - ScrollViewContent
+  - btn9
+  - btn10
+  - btn11
+  - btn12
+  layers:
+  - Default
+  - TransparentFX
+  - Ignore Raycast
+  - 
+  - Water
+  - UI
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  m_SortingLayers:
+  - name: Default
+    uniqueID: 0
+    locked: 0
