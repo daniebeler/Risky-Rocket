@@ -73,13 +73,9 @@ public class CanvasController : MonoBehaviour
 
         RectTransform scrollViewContent = GameObject.FindGameObjectWithTag("ScrollViewContent").GetComponent<RectTransform>();
 
-        scrollViewContent.sizeDelta = new Vector2(scrollViewContent.sizeDelta.x, Mathf.Ceil(12 / 4f) * (höhe + abstand) + Screen.height - höhe * 2f - abstand * 2);
-
+        scrollViewContent.sizeDelta = new Vector2(scrollViewContent.sizeDelta.x, Mathf.Ceil(numberOfLevels / 4f) * (höhe + abstand) + Screen.height - höhe * 2f - abstand * 2);
 
         Button_Go_Home.transform.position = new Vector3(Screen.height / 7, Screen.height / 7 * 6);
-
-        
-
   
         Button_Go_Home.GetComponent<RectTransform>().sizeDelta = new Vector2(Screen.height / 7, Screen.height / 7);
 
