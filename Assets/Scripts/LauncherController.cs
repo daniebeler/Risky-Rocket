@@ -14,7 +14,7 @@ public class LauncherController : MonoBehaviour
     void Start()
     {
         // CHEAT: Unlock all Levels
-        PlayerPrefs.SetInt("unlockedlevels", 420);
+        // PlayerPrefs.SetInt("unlockedlevels", 420);
 
         GameObject.FindGameObjectWithTag("ScriptHolder").GetComponent<Variables>().setRandomColor();
         colorBG = GameObject.FindGameObjectWithTag("ScriptHolder").GetComponent<Variables>().GetColor();
