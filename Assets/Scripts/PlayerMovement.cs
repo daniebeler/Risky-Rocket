@@ -1,7 +1,5 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 public class PlayerMovement : MonoBehaviour
 {
@@ -18,6 +16,7 @@ public class PlayerMovement : MonoBehaviour
     public ParticleSystem particles;
 
     private General general;
+    public SoundController soundController;
 
     void Start()
     {
@@ -37,12 +36,21 @@ public class PlayerMovement : MonoBehaviour
                 if (Input.touchCount > 0)
                 {
                     cf.force = new Vector2(Input.acceleration.x * ForceHorizontalMobile, ForceUp);
-                    particles.Play();
                 }
                 else
                 {
                     cf.force = new Vector2(Input.acceleration.x * ForceHorizontalMobile, ForceDown);
+                }
+
+                if(Input.GetTouch(0).phase == TouchPhase.Began)
+                {
+                    particles.Play();
+                    soundController.fadeInSound();
+                }
+                else if(Input.GetTouch(0).phase == TouchPhase.Ended)
+                {
                     particles.Stop();
+                    soundController.fadeOutSound();
                 }
             }
             else
@@ -61,6 +69,7 @@ public class PlayerMovement : MonoBehaviour
                 {
                     cf.force = new Vector2(cf.force.x, ForceUp);
                     particles.Play();
+                    soundController.fadeInSound();
                 }
 
                 if (Input.GetKeyUp(KeyCode.RightArrow) || Input.GetKeyUp(KeyCode.LeftArrow))
@@ -72,6 +81,7 @@ public class PlayerMovement : MonoBehaviour
                 {
                     cf.force = new Vector2(cf.force.x, ForceDown);
                     particles.Stop();
+                    soundController.fadeOutSound();
                 }
             }
         }
@@ -125,4 +135,6 @@ public class PlayerMovement : MonoBehaviour
         particles.Stop();
         rigid.constraints = RigidbodyConstraints2D.FreezeAll;
     }
+
+    
 }
