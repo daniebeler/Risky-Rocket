@@ -5,8 +5,6 @@ using UnityEngine;
 public class Variables : MonoBehaviour
 {
 
-    
-
     private Color32[] colors;
 
     private void Start()

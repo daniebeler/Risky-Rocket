@@ -5,15 +5,17 @@ using UnityEngine;
 public class SoundController : MonoBehaviour
 {
 
-    private AudioSource audioSource;
-    public bool playSound = false;
-    private float fadeLength = 0.2f;
-    private float maxVolume = 0.6f;
+    [SerializeField]
+    private AudioSource rocketEngineAudioSource;
 
+    [SerializeField]
+    private AudioSource musicAudioSource;
+    private float fadeLength = 0.2f;
+    private float maxRocketEngineVolume = 0.6f;
 
     void Start()
     {
-        audioSource = GetComponent<AudioSource>();
+        setVolumes();
     }
 
     public void fadeInSound()
@@ -30,28 +32,34 @@ public class SoundController : MonoBehaviour
 
     IEnumerator fadeIn()
     {
-        audioSource.volume = 0;
-        audioSource.Play();
+        rocketEngineAudioSource.volume = 0;
+        rocketEngineAudioSource.Play();
 
-        while (audioSource.volume < maxVolume)
+        while (rocketEngineAudioSource.volume < maxRocketEngineVolume)
         {
-            audioSource.volume += maxVolume * Time.deltaTime / fadeLength;
+            rocketEngineAudioSource.volume += maxRocketEngineVolume * Time.deltaTime / fadeLength;
 
             yield return null;
         }
 
-        audioSource.volume = maxVolume;
+        rocketEngineAudioSource.volume = maxRocketEngineVolume;
     }
 
     IEnumerator fadeOut()
     {
-        while (audioSource.volume > 0)
+        while (rocketEngineAudioSource.volume > 0)
         {
-            audioSource.volume -= maxVolume * Time.deltaTime / fadeLength;
+            rocketEngineAudioSource.volume -= maxRocketEngineVolume * Time.deltaTime / fadeLength;
 
             yield return null;
         }
 
-        audioSource.Stop();
+        rocketEngineAudioSource.Stop();
+    }
+
+    public void setVolumes()
+    {
+        musicAudioSource.volume = PlayerPrefs.GetFloat("music_volume", 0.6f);
+        maxRocketEngineVolume = PlayerPrefs.GetFloat("sfx_volume", 0.6f);
     }
 }

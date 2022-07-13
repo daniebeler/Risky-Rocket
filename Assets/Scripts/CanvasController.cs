@@ -18,8 +18,10 @@ public class CanvasController : MonoBehaviour
     public GameObject Menu;
     public GameObject ButtonHolder;
     public GameObject Game;
+    public GameObject Settings;
 
-    public Image bg;
+    [SerializeField]
+    private Image bg;
 
     private General general;
 
@@ -41,11 +43,11 @@ public class CanvasController : MonoBehaviour
         Header.transform.position = new Vector3(0, Screen.height / -4);
         Header.GetComponent<RectTransform>().sizeDelta = new Vector2(breiteHeader, höheHeader);
 
-        for(int i = 1; i <= numberOfLevels; i++)
+        for (int i = 1; i <= numberOfLevels; i++)
         {
             Vector2 spawnPos = new Vector2(i * Screen.height / 2, 0);
 
-            if((i+3) % 4 == 0)    // Links
+            if ((i + 3) % 4 == 0)    // Links
             {
                 spawnPos.x = (breite + abstand) * -1.5f;
             }
@@ -53,7 +55,7 @@ public class CanvasController : MonoBehaviour
             {
                 spawnPos.x = (breite / 2 + abstand / 2);
             }
-            else if(i%4 == 0)       //Rechts
+            else if (i % 4 == 0)       //Rechts
             {
                 spawnPos.x = (breite + abstand) * 1.5f;
             }
@@ -61,8 +63,8 @@ public class CanvasController : MonoBehaviour
             {
                 spawnPos.x = -(breite / 2 + abstand / 2);
             }
-            
-            spawnPos.y =  (-Screen.height + höhe * 2.5f + abstand * 3) - (Mathf.Ceil(i / 4f) * (höhe + abstand));
+
+            spawnPos.y = (-Screen.height + höhe * 2.5f + abstand * 3) - (Mathf.Ceil(i / 4f) * (höhe + abstand));
 
             GameObject LoadedButton = Instantiate(ButtonToSpawn, spawnPos, Quaternion.identity);
             LoadedButton.transform.SetParent(ButtonHolder.transform, false);
@@ -76,14 +78,14 @@ public class CanvasController : MonoBehaviour
         scrollViewContent.sizeDelta = new Vector2(scrollViewContent.sizeDelta.x, Mathf.Ceil(numberOfLevels / 4f) * (höhe + abstand) + Screen.height - höhe * 2f - abstand * 2);
 
         Button_Go_Home.transform.position = new Vector3(Screen.height / 7, Screen.height / 7 * 6);
-  
+
         Button_Go_Home.GetComponent<RectTransform>().sizeDelta = new Vector2(Screen.height / 7, Screen.height / 7);
 
         Color32 col = GameObject.FindGameObjectWithTag("ScriptHolder").GetComponent<Variables>().GetColor();
 
         bg.color = col;
         Camera.main.backgroundColor = col;
-        
+
         Game.SetActive(false);
     }
 
@@ -167,10 +169,21 @@ public class CanvasController : MonoBehaviour
         }
     }
 
-    private void refreshButtons(){
+    private void refreshButtons()
+    {
         for (int j = 0; j < ButtonHolder.transform.childCount; j++)
         {
             ButtonHolder.transform.GetChild(j).gameObject.GetComponent<Button>().interactable = j < PlayerPrefs.GetInt("unlockedlevels", 1);
         }
+    }
+
+    public void activateSettingsMenu()
+    {
+        Settings.SetActive(true);
+    }
+
+    public void disableSettingsMenu()
+    {
+        Settings.SetActive(false);
     }
 }

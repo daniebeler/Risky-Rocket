@@ -21,6 +21,14 @@ public class ButtonController : MonoBehaviour
         {
             general.FadeOutGame();
         }
+        else if(gameObject.name == "btnSettings")
+        {
+            general.openSettings();
+        }
+        else if(gameObject.name == "btnCloseSettings")
+        {
+            general.closeSettings();
+        }
         else
         {
             int z = 0;

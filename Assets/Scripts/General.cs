@@ -39,6 +39,21 @@ public class General : MonoBehaviour
 
     }
 
+    public void openSettings()
+    {
+        if (canClickMenuButtons)
+        {
+            canClickMenuButtons = false;
+            canvasController.activateSettingsMenu();
+        }
+    }
+
+    public void closeSettings()
+    {
+        canClickMenuButtons = true;
+        canvasController.disableSettingsMenu();
+    }
+
     IEnumerator showMenu()
     {
         playerMovement.lockMovement();
