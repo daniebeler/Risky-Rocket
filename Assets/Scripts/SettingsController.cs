@@ -6,10 +6,7 @@ using UnityEngine.UI;
 public class SettingsController : MonoBehaviour
 {
     [SerializeField]
-    private Slider MusicSlider;
-
-    [SerializeField]
-    private Slider SfxSlider;
+    private Slider MusicSlider, SfxSlider;
 
     [SerializeField]
     private SoundController soundController;

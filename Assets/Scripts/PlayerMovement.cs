@@ -10,13 +10,15 @@ public class PlayerMovement : MonoBehaviour
     private float ForceUp = 8;
     private float ForceHorizontal = 8f;
     private float ForceHorizontalMobile = 16f;
-    public bool playing = false;
+    private bool playing = false;
     private Vector2 startPos = new Vector2(0f, 0f);
 
-    public ParticleSystem particles;
+    [SerializeField]
+    private ParticleSystem particles;
 
     private General general;
-    public SoundController soundController;
+
+    private SoundController soundController;
 
     void Start()
     {
@@ -25,6 +27,7 @@ public class PlayerMovement : MonoBehaviour
         cf.force = new Vector2(0f, ForceDown);
 
         general = GameObject.FindGameObjectWithTag("ScriptHolder").GetComponent<General>();
+        soundController = GameObject.FindGameObjectWithTag("ScriptHolder").GetComponent<SoundController>();
     }
 
     void Update()
@@ -42,12 +45,12 @@ public class PlayerMovement : MonoBehaviour
                     cf.force = new Vector2(Input.acceleration.x * ForceHorizontalMobile, ForceDown);
                 }
 
-                if(Input.GetTouch(0).phase == TouchPhase.Began)
+                if (Input.GetTouch(0).phase == TouchPhase.Began)
                 {
                     particles.Play();
                     soundController.fadeInSound();
                 }
-                else if(Input.GetTouch(0).phase == TouchPhase.Ended)
+                else if (Input.GetTouch(0).phase == TouchPhase.Ended)
                 {
                     particles.Stop();
                     soundController.fadeOutSound();
@@ -104,7 +107,8 @@ public class PlayerMovement : MonoBehaviour
             {
                 playing = false;
                 rigid.constraints = RigidbodyConstraints2D.FreezeAll;
-                if(PlayerPrefs.GetInt("unlockedlevels", 1) <= PlayerPrefs.GetInt("currentlevel", 1)){
+                if (PlayerPrefs.GetInt("unlockedlevels", 1) <= PlayerPrefs.GetInt("currentlevel", 1))
+                {
                     PlayerPrefs.SetInt("unlockedlevels", PlayerPrefs.GetInt("currentlevel", 1) + 1);
                 }
                 general.FadeOutGame();
@@ -118,7 +122,8 @@ public class PlayerMovement : MonoBehaviour
         rigid.constraints = RigidbodyConstraints2D.FreezeRotation;
     }
 
-    public void setPlayerPos(Vector2 platformPos){
+    public void setPlayerPos(Vector2 platformPos)
+    {
         platformPos.y += GetComponent<PolygonCollider2D>().bounds.size.y / 1.5f;
         startPos = platformPos;
         setPlayerPos();
@@ -130,11 +135,16 @@ public class PlayerMovement : MonoBehaviour
         rigid.constraints = RigidbodyConstraints2D.FreezeAll;
     }
 
-    public void lockMovement(){
+    public void lockMovement()
+    {
         playing = false;
         particles.Stop();
         rigid.constraints = RigidbodyConstraints2D.FreezeAll;
     }
 
-    
+    public void setPlayingStatus(bool status)
+    {
+        this.playing = status;
+    }
+
 }

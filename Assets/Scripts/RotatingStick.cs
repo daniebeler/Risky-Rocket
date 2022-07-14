@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class RotatingStick : MonoBehaviour
 {
-    public float rotationSpeed = 30f;
+    [SerializeField]
+    private float rotationSpeed = 30f;
 
     void Update()
     {

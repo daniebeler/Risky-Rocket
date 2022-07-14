@@ -10,20 +10,15 @@ public class CanvasController : MonoBehaviour
     private int FadeSequence = 0;
     private float startTime;
 
-    public GameObject Button_Go_Home;
-    public GameObject Header;
-
-    public GameObject ButtonToSpawn;
-
-    public GameObject Menu;
-    public GameObject ButtonHolder;
-    public GameObject Game;
-    public GameObject Settings;
+    [SerializeField]
+    private GameObject Game, Settings, Menu, ButtonHolder, ButtonToSpawn, Header, Button_Go_Home;
 
     [SerializeField]
     private Image bg;
 
     private General general;
+
+    private float scaleFactor;
 
     void Start()
     {
@@ -32,12 +27,14 @@ public class CanvasController : MonoBehaviour
 
         numberOfLevels = GameObject.FindGameObjectWithTag("LevelHolder").transform.childCount;
 
-        float abstand = Screen.width / 5 / 5;
-        float breite = Screen.width / 5;
-        float höhe = Screen.height / 5;
+        scaleFactor = GetComponent<Canvas>().scaleFactor;
+
+        float abstand = Screen.width / 5 / 5 / scaleFactor;
+        float breite = Screen.width / 5 / scaleFactor;
+        float höhe = Screen.height / 5 / scaleFactor;
         float abstandunten = Screen.width * 0.1f + höhe * 0.5f;
 
-        float breiteHeader = Screen.width / 3;
+        float breiteHeader = Screen.width / 3 / scaleFactor;
         float höheHeader = breiteHeader / 7.87f;
 
         Header.transform.position = new Vector3(0, Screen.height / -4);
@@ -64,7 +61,7 @@ public class CanvasController : MonoBehaviour
                 spawnPos.x = -(breite / 2 + abstand / 2);
             }
 
-            spawnPos.y = (-Screen.height + höhe * 2.5f + abstand * 3) - (Mathf.Ceil(i / 4f) * (höhe + abstand));
+            spawnPos.y = (-Screen.height + höhe * scaleFactor * 2.5f + abstand * scaleFactor * 3) / scaleFactor - (Mathf.Ceil(i / 4f) * (höhe + abstand));
 
             GameObject LoadedButton = Instantiate(ButtonToSpawn, spawnPos, Quaternion.identity);
             LoadedButton.transform.SetParent(ButtonHolder.transform, false);

@@ -47,10 +47,10 @@ public class CameraController : MonoBehaviour
         Vector3 aheadTargetPos = target.position + m_LookAheadPos + Vector3.forward * m_OffsetZ;
         newPos = Vector3.SmoothDamp(transform.position, aheadTargetPos, ref m_CurrentVelocity, damping);
 
-        
+
         transform.position = newPos;
         m_LastTargetPosition = target.position;
-        
+
 
         if (FadeSequence == 1)
         {
@@ -59,7 +59,7 @@ public class CameraController : MonoBehaviour
             if (t >= 1)
             {
                 FadeSequence = 0;
-                GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerMovement>().playing = true;
+                GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerMovement>().setPlayingStatus(true);
                 GameObject.FindGameObjectWithTag("Player").GetComponent<Rigidbody2D>().constraints = RigidbodyConstraints2D.FreezeRotation;
                 GameObject.FindGameObjectWithTag("MenuCanvas").GetComponent<CanvasController>().FadeInGameOverlay();
             }
@@ -71,18 +71,20 @@ public class CameraController : MonoBehaviour
             if (t >= 1)
             {
                 FadeSequence = 0;
-                GameObject.FindGameObjectWithTag("LevelHolder").GetComponent<LevelsController>().DisableLevels();
+                GameObject.FindGameObjectWithTag("LevelHolder").GetComponent<LevelsController>().disableLevels();
             }
         }
     }
 
-    public void zoomInCamera(Vector2 pos){
+    public void zoomInCamera(Vector2 pos)
+    {
         transform.position = pos;
         startTime = Time.time;
         FadeSequence = 1;
     }
 
-    public void zoomOutCamera(){
+    public void zoomOutCamera()
+    {
         startTime = Time.time;
         FadeSequence = 2;
     }

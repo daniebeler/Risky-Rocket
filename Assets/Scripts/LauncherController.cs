@@ -1,13 +1,12 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using TMPro;
 
 public class LauncherController : MonoBehaviour
 {
-    public TextMeshProUGUI txtName;
+    [SerializeField]
+    private TextMeshProUGUI txtName;
 
     private Color colorBG;
 

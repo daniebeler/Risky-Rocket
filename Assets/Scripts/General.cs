@@ -4,11 +4,9 @@ using UnityEngine;
 
 public class General : MonoBehaviour
 {
-
     public bool canClickMenuButtons = false;
     public bool canClickGameButtons = false;
 
-    public GameObject Player;
     private LevelsController levelsController;
     private CanvasController canvasController;
     private PlayerMovement playerMovement;
@@ -23,7 +21,7 @@ public class General : MonoBehaviour
         playerMovement = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerMovement>();
         cameraController = Camera.main.GetComponent<CameraController>();
 
-        levelsController.DisableLevels();
+        levelsController.disableLevels();
 
         canvasController.FadeInMenu();
     }
@@ -68,9 +66,9 @@ public class General : MonoBehaviour
         {
             canClickMenuButtons = false;
             canvasController.FadeOutMenu();
-            Vector2 startPos = levelsController.getPlatformPos(level);
+            Vector2 startPos = levelsController.getPlatformPosition(level);
             cameraController.zoomInCamera(startPos);
-            levelsController.EnableLevel(level);
+            levelsController.enableLevel(level);
             playerMovement.setPlayerPos(startPos);
             PlayerPrefs.SetInt("currentlevel", level);
         }

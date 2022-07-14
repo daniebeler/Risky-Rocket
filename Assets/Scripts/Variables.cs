@@ -1,10 +1,7 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Variables : MonoBehaviour
 {
-
     private Color32[] colors;
 
     private void Start()
@@ -22,11 +19,13 @@ public class Variables : MonoBehaviour
         colors = new Color32[] { iconGreen, green, lila, lightBlue, pink, blue, orange, yellow };
     }
 
-    public Color32 GetColor(){
+    public Color32 GetColor()
+    {
         return colors[PlayerPrefs.GetInt("background", 0)];
     }
 
-    public void setRandomColor(){
+    public void setRandomColor()
+    {
         PlayerPrefs.SetInt("background", Random.Range(0, colors.Length));
     }
 }

@@ -11,21 +11,20 @@ public class ButtonController : MonoBehaviour
     void Start()
     {
         general = GameObject.FindGameObjectWithTag("ScriptHolder").GetComponent<General>();
-
         GetComponent<Button>().onClick.AddListener(() => ButtonClicked());
     }
 
     public void ButtonClicked()
     {
-        if(gameObject.name == "btnHome")
+        if (gameObject.name == "btnHome")
         {
             general.FadeOutGame();
         }
-        else if(gameObject.name == "btnSettings")
+        else if (gameObject.name == "btnSettings")
         {
             general.openSettings();
         }
-        else if(gameObject.name == "btnCloseSettings")
+        else if (gameObject.name == "btnCloseSettings")
         {
             general.closeSettings();
         }

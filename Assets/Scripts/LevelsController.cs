@@ -5,12 +5,12 @@ using UnityEngine;
 public class LevelsController : MonoBehaviour
 {
 
-    public void EnableLevel(int level)
+    public void enableLevel(int level)
     {
         transform.GetChild(level - 1).gameObject.SetActive(true);
     }
 
-    public void DisableLevels()
+    public void disableLevels()
     {
         for (int j = 0; j < transform.childCount; j++)
         {
@@ -18,7 +18,7 @@ public class LevelsController : MonoBehaviour
         }
     }
 
-    public Vector2 getPlatformPos(int level)
+    public Vector2 getPlatformPosition(int level)
     {
         Vector2 pos = transform.GetChild(level - 1).gameObject.transform.Find("Start").transform.position;
         return pos;
