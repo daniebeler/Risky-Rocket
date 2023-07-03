@@ -66,10 +66,7 @@ public class General : MonoBehaviour
         {
             canClickMenuButtons = false;
             canvasController.FadeOutMenu();
-            Vector2 startPos = levelsController.getPlatformPosition(level);
-            cameraController.zoomInCamera(startPos);
             levelsController.enableLevel(level);
-            playerMovement.setPlayerPos(startPos);
             PlayerPrefs.SetInt("currentlevel", level);
         }
     }

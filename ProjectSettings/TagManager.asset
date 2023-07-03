@@ -23,6 +23,7 @@ TagManager:
   - btn10
   - btn11
   - btn12
+  - level
   layers:
   - Default
   - TransparentFX
